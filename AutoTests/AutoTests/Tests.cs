@@ -13,13 +13,11 @@ namespace MyTest
         {
             IWebDriver driver = driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            driver.FindElement(By.ClassName("map-search"))
-                .Click();
-            driver.FindElement(By.ClassName("dropdown-trigger"))
-                .Click();
+            driver.FindElement(By.ClassName("map-search")).Click();
+            driver.FindElement(By.ClassName("dropdown-trigger")).Click();
             Thread.Sleep(3000);
             driver.Close();
-            driver.Dispose();
+            driver.Quit();
         }
     }
 }
