@@ -19,5 +19,19 @@ namespace MyTest
             driver.Close();
             driver.Quit();
         }
+        [Test]
+        public void FirstTestYavlena()
+        {
+            IWebDriver driver = driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("map-search")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("dropdown-trigger")).Click();
+            Thread.Sleep(3000);
+
+            driver.Close();
+            driver.Quit();
+        }
     }
 }
