@@ -59,7 +59,7 @@ namespace MyTest
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("област Пловдив, Пловдив");
             Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("green-btn")).Click();
+            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
             Thread.Sleep(3000);
             driver.Close();
             driver.Quit();
