@@ -66,29 +66,31 @@ namespace MyTest
         }
 
         [Test]
-        public void Lesson2HoomeWorkMitko()
+        public void Lesson2HomeWorkMitko()
         {
             IWebDriver driver = driver = new ChromeDriver();
             //driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitlyWait(System.TimeSpan.FromSeconds(10));
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("Pavlovo");
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             driver.FindElement(By.ClassName("icon-search____ICON")).Click();
+            //Thread.Sleep(3000);
             driver.FindElement(By.Id("searchBox-validation"));
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             driver.FindElement(By.ClassName("ui-autocomplete-input")).Clear();
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("Павлово");
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
+            driver.FindElement(By.Id("ui-id-2")).Click();
+            //Thread.Sleep(3000);
             driver.FindElement(By.ClassName("icon-search____ICON")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             driver.FindElement(By.ClassName("brand")).Click();
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             driver.FindElement(By.ClassName("map-search")).Click();
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             driver.Close();
             driver.Quit();
         }
