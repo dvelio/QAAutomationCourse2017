@@ -50,5 +50,33 @@ namespace MyTest
             driver.Close();
             driver.Quit();
         }
+
+        [Test]
+        public void Lesson2HoomeWorkMitko()
+        {
+            IWebDriver driver = driver = new ChromeDriver();
+            //driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("Pavlovo");
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
+            driver.FindElement(By.Id("searchBox-validation"));
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("ui-autocomplete-input")).Clear();
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("Павлово");
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("brand")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("map-search")).Click();
+            Thread.Sleep(3000);
+            driver.Close();
+            driver.Quit();
+        }
     }
 }
