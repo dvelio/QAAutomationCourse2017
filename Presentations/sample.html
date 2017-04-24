@@ -1,0 +1,46 @@
+<html>
+<head>
+<style media="screen" type="text/css">
+.bold{
+font-weight: bold;
+}
+.tab1{
+margin-left: 20px
+}
+.tab2{
+margin-left: 20px
+}
+.button{
+border-style: outset;
+border-width: 5px;
+border-color: black;
+display:inline-block;
+}
+
+</style>
+</head>
+<body>
+	<header class="headerclass">Header
+		<button class="button">Header Button</button>
+	</header>
+	<button class="button">Button 1</button>
+	<div class="bold">Div 1</div>
+	<div customattr="abc" id="d2">Div 2</div>
+	<div>
+		<button class="bold tab1">Button 2</button>
+	</div>
+	<div class="button">Div 4</div>
+	<div>Div 5</div>
+	<div class="list">Div 6
+		<div class="tab1">6.1</div>
+		<div class="tab1">6.2
+			<div class="tab2">6.2.1</div>
+			<div class="tab2">6.2.2</div>
+			<div class="tab2 button">6.2.3</div>
+		</div>
+		<div class="tab1">6.3</div>
+		<div class="tab1">6.4</div>
+	</div>
+	<footer class="bold">Footer</footer>
+</body>
+</html>
