@@ -71,7 +71,7 @@ namespace MyTest
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
             Thread.Sleep(5000);
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist/");
             driver.FindElement(By.CssSelector("[href*='/propertylist/rentals/']")).Click();
             driver.FindElement(By.XPath("//form/p[2]/a[1]")).Click();
             driver.FindElement(By.XPath("//*[contains(text(),'Едностаен апартамент')]")).Click();
