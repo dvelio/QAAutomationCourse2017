@@ -113,5 +113,20 @@ namespace MyTest
             driver.Close();
             driver.Quit();
         }
+        [Test]
+        public void Homework2EDLocatorsByName()
+        {
+            IWebDriver driver = driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("dropdown-trigger")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.ClassName("icon - search____ICON")).Click();
+
+            driver.Close();
+            driver.Quit();
+        }
     }
 }
