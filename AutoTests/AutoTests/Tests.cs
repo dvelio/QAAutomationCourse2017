@@ -124,7 +124,7 @@ namespace MyTest
             driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("icon - search____ICON")).Click();
-
+            Thread.Sleep(3000);
             driver.Close();
             driver.Quit();
         }
