@@ -123,7 +123,7 @@ namespace MyTest
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
             Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("green - btn")).Click();
+            driver.FindElement(By.ClassName("green-btn")).Click();
             Thread.Sleep(3000);
             driver.Close();
             driver.Quit();
