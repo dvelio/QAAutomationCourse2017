@@ -69,6 +69,8 @@ namespace MyTest
         {
             IWebDriver driver = driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
+            driver.Manage().Cookies.DeleteAllCookies();
+            Thread.Sleep(5000);
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
             driver.FindElement(By.CssSelector("[href*='/propertylist/rentals/']")).Click();
             driver.FindElement(By.XPath("//form/p[2]/a[1]")).Click();
@@ -77,7 +79,9 @@ namespace MyTest
             driver.FindElement(By.CssSelector("[href*='/propertylist/rentals/vidin/vidin/quarter/residentialproperties/onebedroomapartment/']")).Click();
             driver.FindElement(By.CssSelector(".green-btn")).Click();
             Thread.Sleep(3000);
-            
+            driver.Close();
+            driver.Quit();
+
         }
 
         [Test]
