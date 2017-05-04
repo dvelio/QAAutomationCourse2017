@@ -180,8 +180,6 @@ namespace AutoTests
             driver.Close();
             driver.Quit();
         }
-<<<<<<< HEAD
-=======
         [Test]
         public void HW2Dido()
         {
@@ -215,9 +213,6 @@ namespace AutoTests
 
 
         }
-
->>>>>>> 49b5b7737ec75505b6b96510793e4389da173ab9
-
     }
 }
 
