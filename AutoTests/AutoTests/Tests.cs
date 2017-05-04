@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AutoTests;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
@@ -71,7 +72,7 @@ namespace MyTest
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
             Thread.Sleep(5000);
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist/");
             driver.FindElement(By.CssSelector("[href*='/propertylist/rentals/']")).Click();
             driver.FindElement(By.XPath("//form/p[2]/a[1]")).Click();
             driver.FindElement(By.XPath("//*[contains(text(),'Едностаен апартамент')]")).Click();
@@ -83,7 +84,19 @@ namespace MyTest
             driver.Quit();
 
         }
+        [Test]
+        public void ZdelkaStefan()
+        {
+            IWebDriver driver = driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
+            driver.FindElement(By.XPath("//*[contains(text(),'Съдействие при сделка')]")).Click();
+            driver.FindElement(By.XPath("//div/label[7]/div[@class='icheckbox_flat-green checked']"));
+               
+            driver.Close();
+            driver.Quit();
 
+        }
         [Test]
         public void Lesson2HomeWorkMitko()
         {
@@ -152,5 +165,12 @@ namespace MyTest
             driver.Quit();
         }
 
+    }
+}
+
+namespace AutoTests
+{
+    class e
+    {
     }
 }
