@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
 
-namespace MyTest
+namespace AutoTests
 {
     [TestFixture]
     public class Tests
@@ -157,6 +157,8 @@ namespace MyTest
             driver.FindElement(By.XPath("/html/body/div2/div/section/div/div/div/div/form/p[2]/a[1]")).Click();
             driver.FindElement(By.XPath("//form/p[4]/a[2]")).Click();
             driver.FindElement(By.XPath("//*[contains(text(),'к.к. Слънчев бряг')]")).Click();
+            driver.FindElement(By.CssSelector("[href *= 'propertylist/sales/burgas/sunny-beach-resort-area/quarter/residentialproperties/room/seaside-holiday-property/']")).Click();
+            driver.FindElement(By.XPath("")).Click();
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
             Thread.Sleep(3000);
@@ -168,9 +170,3 @@ namespace MyTest
     }
 }
 
-namespace AutoTests
-{
-    class e
-    {
-    }
-}
