@@ -97,6 +97,21 @@ namespace AutoTests
 
         }
         [Test]
+        public void BrokerStefan()
+        {
+            IWebDriver driver = driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
+            driver.FindElement(By.XPath("//div[2]/section/div[4]/a"));
+            driver.FindElement(By.CssSelector(".input-search")).SendKeys("Аделина Янева");
+            Thread.Sleep(3000);
+            Assert.AreEqual(driver.FindElement(By.CssSelector("#brokers-grid-holder > div > div > article > div > div > div.header-group > h3 > a")).GetAttribute("title"), "Аделина Янева");
+            driver.Close();
+            driver.Quit();
+
+        }
+
+        [Test]
         public void Lesson2HomeWorkMitko()
         {
             IWebDriver driver = driver = new ChromeDriver();
