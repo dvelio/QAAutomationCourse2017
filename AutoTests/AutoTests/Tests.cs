@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace AutoTests
@@ -262,8 +265,37 @@ namespace AutoTests
             Thread.Sleep(3000);
             driver.FindElement(By.XPath("//*[text()='Свържи се с брокер']")).Click();
             Thread.Sleep(3000);
+        }
+            [Test]
+        public void HW4Dido()
+
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(1000);
+            driver.FindElement(By.CssSelector(".hide-cookies-message")).Click();
+            driver.FindElement(By.CssSelector("a.green-btn:nth-child(1)"));
+            Thread.Sleep(1000);
+            IList<IWebElement> List = driver.FindElements(By.CssSelector("article.broker-card h3.name a"));
+
+            ArrayList NewList = new ArrayList();
+            foreach (IWebElement UserName in List)
+            {
+                NewList.Add(UserName.Text);
+                Console.WriteLine(NewList);
+            }
 
 
+            foreach (string Name in NewList)
+            {
+                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).Clear();
+                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).SendKeys(Name);
+                Thread.Sleep(1000);
+                Assert.AreEqual(Name, driver.FindElement(By.CssSelector(".name > a:nth-child(1)")).Text);
+                Thread.Sleep(1000);
+
+            }
 
         }
     }
