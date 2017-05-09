@@ -1,6 +1,10 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace MyTest
@@ -8,6 +12,11 @@ namespace MyTest
     [TestFixture]
     public class Tests
     {
+        private IWebElement element;
+
+        public object KeyHandle { get; private set; }
+        public object ActiveBrowser { get; private set; }
+
         [Test]
         public void Test1()
         {
@@ -49,7 +58,7 @@ namespace MyTest
             Thread.Sleep(3000);
             driver.Close();
             driver.Quit();
-           
+
         }
 
         [Test]
@@ -91,7 +100,7 @@ namespace MyTest
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
             driver.FindElement(By.XPath("//*[contains(text(),'Съдействие при сделка')]")).Click();
             driver.FindElement(By.XPath("//div/label[7]/div[@class='icheckbox_flat-green checked']"));
-               
+
             driver.Close();
             driver.Quit();
 
@@ -185,11 +194,42 @@ namespace MyTest
             Thread.Sleep(3000);
             Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_PropertyAssessment")).Selected, true);
 
+        }
+        [Test]
+        public void HW4Dido()
 
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(1000);
+            driver.FindElement(By.CssSelector(".hide-cookies-message")).Click();
+            driver.FindElement(By.CssSelector("a.green-btn:nth-child(1)"));            
+            Thread.Sleep(1000);
+            IList<IWebElement> List = driver.FindElements(By.CssSelector("article.broker-card h3.name a"));
 
+            ArrayList NewList = new ArrayList();
+            foreach (IWebElement UserName in List)
+            {                 
+                NewList.Add(UserName.Text);
+                Console.WriteLine(NewList);
+            }
+
+            
+            foreach (string Name in NewList)             
+            {
+                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).Clear();                
+                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).SendKeys(Name);
+                Thread.Sleep(1000);
+                Assert.AreEqual(Name, driver.FindElement(By.CssSelector(".name > a:nth-child(1)")).Text);              
+                Thread.Sleep(1000);
+
+            }
         }
 
-
     }
+
+
 }
+
 
