@@ -275,10 +275,15 @@ namespace AutoTests
             driver.Manage().Window.Maximize();
             Thread.Sleep(1000);
             driver.FindElement(By.CssSelector(".hide-cookies-message")).Click();
-            driver.FindElement(By.CssSelector("a.green-btn:nth-child(1)"));
+            IWebElement scroll = driver.FindElement(By.Id("searchBox"));
+            scroll.Click();
+            scroll.SendKeys(Keys.PageDown);
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("div.load-more-brokers a")).Click();
+            scroll.SendKeys(Keys.PageUp);
+            Thread.Sleep(3000);
+            IList <IWebElement> List = driver.FindElements(By.CssSelector("article.broker-card h3.name a"));
             Thread.Sleep(1000);
-            IList<IWebElement> List = driver.FindElements(By.CssSelector("article.broker-card h3.name a"));
-
             ArrayList NewList = new ArrayList();
             foreach (IWebElement UserName in List)
             {
