@@ -5,6 +5,7 @@ using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace AutoTests
@@ -150,11 +151,33 @@ namespace AutoTests
 
         }
 
-        private bool TryFindElement(By by)
+        [Test]
+        public void AllCitiesSs()
         {
-            throw new NotImplementedException();
-        }
+            IWebDriver driver = driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            driver.FindElement(By.ClassName("hide-cookies-message")).Click();                              //accept cookies
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector(".all-cities.cities-btn")).Click();
+            Thread.Sleep(3000);
 
+            IWebElement body = driver.FindElement(By.XPath("//*[contains(text(),'Царево')]"));       //open link in new tab
+            body.SendKeys(Keys.Control.ToString() + 't');                                            //open link in new tab
+            Actions action = new Actions(driver);                                                    //open link in new tab
+            action.KeyDown(Keys.Control).MoveToElement(body).Click().Perform();                      //open link in new tab
+
+
+            driver.SwitchTo().Window(driver.WindowHandles.LastOrDefault());                       // switch tab
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector(".view-mode:nth-child(1)")).Click();                // view by list
+            Thread.Sleep(3000);
+
+            driver.FindElement(By.CssSelector("[href*='/broker/sendmessageforproperty?brokerId=FB2CD300-4BF0-43C5-953D-750ACD624169&serviceId=6df97f77-0b50-45d7-81b6-29c7873acc85']")).Click();
+            driver.Close();
+            driver.Quit();
+
+        }
         [Test]
         public void Homework2EDLocatorsByName()
         {
