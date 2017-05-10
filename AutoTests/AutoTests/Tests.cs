@@ -149,7 +149,7 @@ namespace AutoTests
         [Test]
         public void AllCitiesSs()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();                              //accept cookies
