@@ -16,7 +16,7 @@ namespace AutoTests
         [Test]
         public void Test1()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("map-search")).Click();
             driver.FindElement(By.ClassName("dropdown-trigger")).Click();
@@ -27,7 +27,7 @@ namespace AutoTests
         [Test]
         public void FirstTestYavlena()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("map-search")).Click();
@@ -42,7 +42,7 @@ namespace AutoTests
         [Test]
         public void Lesson2HoomeWork()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("map-search")).Click();
@@ -60,7 +60,7 @@ namespace AutoTests
         [Test]
         public void HomeWorkStefanS()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("област Пловдив, Пловдив");
             Thread.Sleep(3000);
@@ -72,7 +72,7 @@ namespace AutoTests
         [Test]
         public void RentalsStefan()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
             Thread.Sleep(5000);
@@ -91,7 +91,7 @@ namespace AutoTests
         [Test]
         public void ZdelkaStefan()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
             driver.FindElement(By.XPath("//*[contains(text(),'Съдействие при сделка')]")).Click();
@@ -104,7 +104,7 @@ namespace AutoTests
         [Test]
         public void BrokerStefan()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
             driver.FindElement(By.XPath("//div[2]/section/div[4]/a"));
@@ -117,19 +117,14 @@ namespace AutoTests
                 Thread.Sleep(3000);
                 Assert.AreEqual(driver.FindElement(By.CssSelector("#brokers-grid-holder > div > div > article > div > div > div.header-group > h3 > a")).GetAttribute("title"), arr[i]);
                 Thread.Sleep(3000);
-
-               
             }
             driver.Close();
             driver.Quit();
-
-
-
         }
         [Test]
         public void NewHome()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             
@@ -181,7 +176,7 @@ namespace AutoTests
         [Test]
         public void Homework2EDLocatorsByName()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("dropdown-trigger")).Click();
@@ -201,7 +196,7 @@ namespace AutoTests
         // 3. Click on “Свържи се с брокер” button for the (preferably) second property in the list
         // Commit and push the test
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
             Thread.Sleep(3000);
             driver.FindElement(By.CssSelector("[href *= '/propertylist/sales/']")).Click();
@@ -270,7 +265,7 @@ namespace AutoTests
         [Test]
         public void HW1Mitko()
         {
-            IWebDriver driver = driver = new ChromeDriver();
+            IWebDriver driver = new ChromeDriver();
             //driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitlyWait(System.TimeSpan.FromSeconds(10));
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
