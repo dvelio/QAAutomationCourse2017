@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -124,8 +125,36 @@ namespace AutoTests
 
 
         }
+        [Test]
+        public void NewHome()
+        {
+            IWebDriver driver = driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            
+            var element = driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/h1"));               // scrolling
+            OpenQA.Selenium.Interactions.Actions actions = new Actions(driver);                            // scrolling
+            actions.MoveToElement(element);                                                                // scrolling
+            actions.Perform();                                                                             // scrolling
+            Thread.Sleep(2000);
 
-        
+            driver.FindElement(By.ClassName("hide-cookies-message")).Click();                              //accept cookies
+            Thread.Sleep(3000);
+
+            driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/h1")).Click();
+            Thread.Sleep(3000);
+            bool isElementDisplayed=driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/div/p")).Displayed;       // verify message is displayed
+            Thread.Sleep(3000);
+            driver.Close();
+            driver.Quit();
+
+        }
+
+        private bool TryFindElement(By by)
+        {
+            throw new NotImplementedException();
+        }
+
         [Test]
         public void Homework2EDLocatorsByName()
         {
