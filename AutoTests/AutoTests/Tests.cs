@@ -174,7 +174,7 @@ namespace AutoTests
 
         }
         [Test]
-        public void Homework2EDLocatorsByName()
+        public void HW2EDLocatorsByName()
         {
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
@@ -189,7 +189,7 @@ namespace AutoTests
             driver.Quit();
         }
         [Test]
-        public void Homework3EDCssSelectors()
+        public void HW3EDCssSelectors()
         //Selected number 10125
         // 1. Opens the url
         // 2. Clicks on the respective Услуга, Тип имот, Вид имот, Област,  град depending on your number and choice of City
@@ -214,7 +214,26 @@ namespace AutoTests
             driver.Quit();
 
         }
+        [Test]
+        public void HW4EDCssSelectors()
+        //1.Open https://yavlenawebsite.melontech.com/service/
+        //2. On the left there are links to different services
+        //3. Click Rent 
+        //4. After clicking on the link for the service new webpage is opened. On the newly opened page make sure the correct checkbox is ticked: next to the service you choose in the previous screen
 
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("[href *= '/service/forrent']")).Click();
+            Thread.Sleep(3000);
+            Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_PropertyAssessment")).Selected, true);
+        }
+
+
+
+
+}
         [Test]
         public void HW1Dido()
         {
@@ -256,11 +275,11 @@ namespace AutoTests
             driver.Manage().Window.Maximize();
             driver.FindElement(By.XPath("/ html / body / div[2] / div / section[1] / aside[1] / nav / ul / li[5] / a")).Click();
             Thread.Sleep(3000);
-            Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_PropertyAssessment")).Selected, true);
+            Assert.AreEqual(driver.FindElement(By.Id("OwnerContact.GiveARentProperty")).Selected, true);
+            driver.Close();
+            driver.Quit();
 
-
-
-        }
+    }
 
         [Test]
         public void HW1Mitko()
