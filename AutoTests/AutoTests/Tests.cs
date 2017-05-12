@@ -15,7 +15,7 @@ namespace AutoTests
     {
         [Test]
         public void Test1()
-        {
+        { 
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("map-search")).Click();
@@ -233,7 +233,6 @@ namespace AutoTests
 
 
 
-}
         [Test]
         public void HW1Dido()
         {
