@@ -368,6 +368,14 @@ namespace AutoTests
             }
 
         }
+        [Test]
+        public void HWPeter1()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(1000);
+        }
     }
 }
 
