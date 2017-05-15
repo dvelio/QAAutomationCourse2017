@@ -127,7 +127,7 @@ namespace AutoTests
             driver.FindElement(By.CssSelector(".view-mode:nth-child(1)")).Click();                // view by list
             Thread.Sleep(3000);
 
-            driver.FindElement(By.CssSelector("[href*='/broker/sendmessageforproperty?brokerId=FB2CD300-4BF0-43C5-953D-750ACD624169&serviceId=6df97f77-0b50-45d7-81b6-29c7873acc85']")).Click();
+            driver.FindElement(By.CssSelector("[href*='/broker/sendmessageforproperty?brokerId=FB2CD300-4BF0-43C5-953D-750ACD624169&serviceId=6df97f77-0b50-45d7-81b6-29c7873acc85']")).Click(); //abc
             driver.Close();
             driver.Quit();
 
@@ -135,3 +135,4 @@ namespace AutoTests
 
     }
 }
+
