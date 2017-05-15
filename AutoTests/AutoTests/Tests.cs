@@ -384,6 +384,19 @@ namespace AutoTests
             driver.FindElement(By.CssSelector("button.green-btn")).Click();
             
         }
+        [Test]
+        public void HWPeter2()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(3000);
+            driver.FindElement(By.LinkText("Пазарни проучвания")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.XPath("//form[@id='contact-owner']/div[3]/div/label[6]/div/ins"));
+
+        }
+
     }
 }
 
