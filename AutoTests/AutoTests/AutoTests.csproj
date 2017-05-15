@@ -55,6 +55,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aleks.cs" />
+    <Compile Include="Pesho.cs" />
+    <Compile Include="Stefan.cs" />
+    <Compile Include="Tsani.cs" />
+    <Compile Include="Mitko.cs" />
+    <Compile Include="Dido.cs" />
+    <Compile Include="Eva.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stefan.cs" />
     <Compile Include="Tests.cs" />

@@ -13,6 +13,11 @@ namespace AutoTests
     [TestFixture]
     public class Tests
     {
+        public void EndDriver(IWebDriver driver)
+        {
+            driver.Close();
+            driver.Quit();
+        }
         [Test]
         public void Test1()
         { 
@@ -21,8 +26,7 @@ namespace AutoTests
             driver.FindElement(By.ClassName("map-search")).Click();
             driver.FindElement(By.ClassName("dropdown-trigger")).Click();
             Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
+            EndDriver(driver);
         }
         [Test]
         public void FirstTestYavlena()
