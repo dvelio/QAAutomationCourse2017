@@ -374,7 +374,15 @@ namespace AutoTests
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/");
             driver.Manage().Window.Maximize();
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("a.dropdown-trigger")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("span.text-value")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.XPath("//div[2]/div/div/a")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("button.green-btn")).Click();
+            
         }
     }
 }
