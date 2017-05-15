@@ -394,7 +394,9 @@ namespace AutoTests
             driver.FindElement(By.LinkText("Пазарни проучвания")).Click();
             Thread.Sleep(3000);
             driver.FindElement(By.XPath("//form[@id='contact-owner']/div[3]/div/label[6]/div/ins"));
-
+            Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_MarketAnalysis")).Selected, true);
+            driver.Close();
+            driver.Quit();
         }
 
     }
