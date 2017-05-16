@@ -96,9 +96,11 @@ namespace AutoTests
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();                              //accept cookies
             Thread.Sleep(3000);
 
-            driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/h1")).Click();
+            driver.FindElement(By.CssSelector("h1.home-title")).Click();
             Thread.Sleep(3000);
-            bool isElementDisplayed = driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/div/p")).Displayed;       // verify message is displayed
+            driver.FindElement(By.XPath(@"//h1/parent::div[contains(@class, 'open')]"));
+            //bool isElementDisplayed = driver.FindElement(By.XPath("//h1[contains(@class,'home-title')]/../div[@class='seo-text-wrapper']")).Displayed;       // verify message is displayed
+            //Assert.AreEqual(false, isElementDisplayed);
             Thread.Sleep(3000);
             driver.Close();
             driver.Quit();
@@ -127,7 +129,9 @@ namespace AutoTests
             driver.FindElement(By.CssSelector(".view-mode:nth-child(1)")).Click();                // view by list
             Thread.Sleep(3000);
 
-            driver.FindElement(By.CssSelector("[href*='/broker/sendmessageforproperty?brokerId=FB2CD300-4BF0-43C5-953D-750ACD624169&serviceId=6df97f77-0b50-45d7-81b6-29c7873acc85']")).Click(); //abc
+            //driver.FindElement(By.CssSelector("[href*='/broker/sendmessageforproperty?brokerId=FB2CD300-4BF0-43C5-953D-750ACD624169&serviceId=6df97f77-0b50-45d7-81b6-29c7873acc85']")).Click(); //abc
+            driver.FindElement(By.CssSelector(".list-results-list article:nth-of-type(3) a.green-btn.broker-link")).Click();
+
             driver.Close();
             driver.Quit();
 
