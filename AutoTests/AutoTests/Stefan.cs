@@ -102,7 +102,7 @@ namespace AutoTests
 
             driver.FindElement(By.CssSelector("h1.home-title")).Click();
             Thread.Sleep(3000);
-            driver.FindElement(By.XPath(@"//h1/parent::div[contains(@class, 'open')]"));
+            driver.FindElement(By.XPath(@"//*[contains(@class, 'open')][h1]"));
             //bool isElementDisplayed = driver.FindElement(By.XPath("//h1[contains(@class,'home-title')]/../div[@class='seo-text-wrapper']")).Displayed;       // verify message is displayed
             //Assert.AreEqual(false, isElementDisplayed);
             Thread.Sleep(3000);
