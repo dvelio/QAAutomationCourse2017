@@ -259,8 +259,7 @@ namespace AutoTests
 
 
             Thread.Sleep(3000);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.FindElement(By.XPath("//*[contains(text(),'жилище под наем')]")).Click();
+            driver.FindElement(By.XPath("//article[contains(@class,'burgas-section')]//a[contains(text(),'жилище под наем')]")).Click();
             driver.Navigate().Back();
             driver.FindElement(By.ClassName("hide-cookies-message")).Click(); 
             
@@ -287,7 +286,7 @@ namespace AutoTests
             StaraZagoraOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
-            driver.FindElement(By.XPath("//*[contains(text(),'жилище под наем')]")).Click();
+            driver.FindElement(By.XPath("//article[contains(@class,'bl-section')]//a[contains(text(),'жилище под наем')]")).Click();
             driver.Navigate().Back();
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
 
