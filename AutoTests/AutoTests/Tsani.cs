@@ -17,17 +17,15 @@ namespace AutoTests
         public void Lesson2HoomeWork()
         {
             IWebDriver driver = new ChromeDriver();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            Thread.Sleep(3000);
             driver.FindElement(By.ClassName("map-search")).Click();
-            Thread.Sleep(3000);
             driver.FindElement(By.ClassName("brand")).Click();
-            Thread.Sleep(3000);
             driver.FindElement(By.Id("searchBox")).Click();
             driver.FindElement(By.Id("searchBox")).SendKeys("Sofia");
-            Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
+            //TestCleanUp
+            DriverCleanUp(driver);
 
         }
 
@@ -52,6 +50,7 @@ namespace AutoTests
             string url = "https://yavlenawebsite.melontech.com/propertylist";
 
             IWebDriver driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl(url);
             driver.Manage().Window.Maximize();
 
@@ -120,7 +119,6 @@ namespace AutoTests
             else
             { links[0].Click(); }
 
-            Thread.Sleep(3000);
             //TestCleanUp
             DriverCleanUp(driver);
 
@@ -142,6 +140,7 @@ namespace AutoTests
             string url = "https://yavlenawebsite.melontech.com/service/";
 
             IWebDriver driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl(url);
             driver.Manage().Window.Maximize();
 
@@ -160,12 +159,14 @@ namespace AutoTests
                 throw new Exception("Not checked");
             }
 
-            Thread.Sleep(3000);
+
             //TestCleanUp
             DriverCleanUp(driver);
 
 
         }
+
+        
 
         [Test]
         public void Lesson3HomeWorkAdditionalTsanka()
@@ -184,9 +185,10 @@ namespace AutoTests
             string url = "https://yavlenawebsite.melontech.com/broker/";
 
             IWebDriver driver = new ChromeDriver();
+           
             driver.Navigate().GoToUrl(url);
             driver.Manage().Window.Maximize();
-            Thread.Sleep(5000);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
 
             IWebElement cookiesBut = driver.FindElement(By.CssSelector("*[class^='hide-cookies-message']"));
@@ -194,18 +196,19 @@ namespace AutoTests
 
             //2.Click on the „зареди още“ button.
             //This way all the brokers are listed
-            Thread.Sleep(5000);
+            Thread.Sleep(6000);
 
 
             IWebElement moreResults = driver.FindElement(By.PartialLinkText("Зареди"));
             moreResults.Click();
-
+           
             //3.For each broker check that if you type their name in the Search field, only one broker is listed – the one you are searching for
 
-
             Thread.Sleep(3000);
-
+            // find all  brokers and put in a list
             IList<IWebElement> moreBrokers = driver.FindElements(By.CssSelector("h3.name"));
+
+            // all names in array
             String[] allBrokersText = new String[moreBrokers.Count];
 
             for (int i = 0; i < moreBrokers.Count; i++)
@@ -215,43 +218,60 @@ namespace AutoTests
             }
 
 
-
+            //  search by name and check result - loop 
             IWebElement searchByName = driver.FindElement(By.ClassName("input-search"));
 
-
-
             for (int j = 0; j < allBrokersText.Length; j++)
-            {
-                driver.FindElement(By.ClassName("input-search")).Clear();
-                driver.FindElement(By.ClassName("input-search")).SendKeys(allBrokersText[j]);
+            { 
+                searchByName.Clear();
+                searchByName.SendKeys(allBrokersText[j]);
                 Thread.Sleep(2000);
-                String.Compare(allBrokersText[j], driver.FindElement(By.CssSelector(".name")).Text);
+                // check if just one result of the search is listed
+                IList<IWebElement> namesFound = driver.FindElements(By.CssSelector(".name"));
+                if (namesFound.Count==0)
+                    {
+                    Console.WriteLine("No results about "+ allBrokersText[j]);
+                    throw new Exception("No results about "+ allBrokersText[j]);
+                    }
+
+                else if (namesFound.Count() > 1)
+                {
+                    Console.WriteLine("More than one broker listed.");
+                    throw new Exception("More than one broker found");
+                }
+                else
+                {
+                    // compare name - input field and listed as result of the search 
+                    if (String.Compare(allBrokersText[j], driver.FindElement(By.CssSelector(".name")).Text) != 0)
+                    {
+                        Console.WriteLine("Different names");
+                        throw new Exception("Different names");
+                    }
+
+                }
                 Thread.Sleep(2000);
 
             }
-
-
-            Thread.Sleep(5000);
             //TestCleanUp
             DriverCleanUp(driver);
 
 
         }
 
-        private static void FindByCssLocatorAndClick(IWebDriver myDriver, string strToFindBy)
+        public static void FindByCssLocatorAndClick(IWebDriver myDriver, string strToFindBy)
         {
             IWebElement cssElement = myDriver.FindElement(By.CssSelector(strToFindBy));
             cssElement.Click();
         }
 
-        private static void FindByXpathAndClick(IWebDriver myDriver, string strToFindBy)
+        public static void FindByXpathAndClick(IWebDriver myDriver, string strToFindBy)
         {
             IWebElement cssElement = myDriver.FindElement(By.XPath(strToFindBy));
             cssElement.Click();
         }
 
 
-        private static void DriverCleanUp(IWebDriver myDriver)
+        public static void DriverCleanUp(IWebDriver myDriver)
 
         {
             myDriver.Close();
