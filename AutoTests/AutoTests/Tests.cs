@@ -13,16 +13,20 @@ namespace AutoTests
     [TestFixture]
     public class Tests
     {
+        public void EndDriver(IWebDriver driver)
+        {
+            driver.Close();
+            driver.Quit();
+        }
         [Test]
         public void Test1()
-        {
+        { 
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("map-search")).Click();
             driver.FindElement(By.ClassName("dropdown-trigger")).Click();
             Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
+            EndDriver(driver);
         }
         [Test]
         public void FirstTestYavlena()
@@ -233,7 +237,6 @@ namespace AutoTests
 
 
 
-}
         [Test]
         public void HW1Dido()
         {
@@ -369,6 +372,37 @@ namespace AutoTests
             }
 
         }
+        [Test]
+        public void HWPeter1()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("a.dropdown-trigger")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("span.text-value")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.XPath("//div[2]/div/div/a")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.CssSelector("button.green-btn")).Click();
+            
+        }
+        [Test]
+        public void HWPeter2()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(3000);
+            driver.FindElement(By.LinkText("Пазарни проучвания")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.XPath("//form[@id='contact-owner']/div[3]/div/label[6]/div/ins"));
+            Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_MarketAnalysis")).Selected, true);
+            driver.Close();
+            driver.Quit();
+        }
+
     }
 }
 
