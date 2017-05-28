@@ -11,11 +11,13 @@ using System.Threading;
 namespace AutoTests
 {
     [TestFixture]
+    [Author("Dimitar Velev", "dvelev@melontech.com")]
     public class Mitko
     {
 
 
         [Test]
+        [Category("Mitko Tests")]
         public void HW1Mitko()
         {
             var driver = new ChromeDriver();
@@ -45,6 +47,7 @@ namespace AutoTests
         }
 
         [Test]
+        [Category("Mitko Tests")]
         public void HW3Mitko()
         {
             IWebDriver driver = new ChromeDriver();
