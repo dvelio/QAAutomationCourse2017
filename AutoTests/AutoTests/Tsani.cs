@@ -190,7 +190,7 @@ namespace AutoTests
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-
+            // match substring as prefix
             IWebElement cookiesBut = driver.FindElement(By.CssSelector("*[class^='hide-cookies-message']"));
             cookiesBut.Click();
 
@@ -255,6 +255,130 @@ namespace AutoTests
             //TestCleanUp
             DriverCleanUp(driver);
 
+
+        }
+
+
+        [Test]
+
+        //Choose at least 5 pages, and on each of them check all the Header links are present
+
+        [TestCase("https://yavlenawebsite.melontech.com/career",ExpectedResult=true)]
+        [TestCase("https://yavlenawebsite.melontech.com/service/sale", ExpectedResult = true)]
+        [TestCase("https://yavlenawebsite.melontech.com/service/forrent", ExpectedResult = true)]
+        [TestCase("https://yavlenawebsite.melontech.com/propertylist/", ExpectedResult = true)]
+        [TestCase("https://yavlenawebsite.melontech.com/service/dealhelp", ExpectedResult = true)]
+
+
+        public Boolean Lesson5HomeWork(string urlToOpen)
+        {
+
+
+            bool elementsDisplayed = false;
+            Console.WriteLine("Test of :"+'\n'+urlToOpen);
+            Console.WriteLine("Result:");
+            IWebDriver driver = new ChromeDriver();
+
+            driver.Navigate().GoToUrl(urlToOpen);
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            // match substring as prefix
+            IWebElement cookiesBut = driver.FindElement(By.CssSelector("*[class^='hide-cookies-message']"));
+            cookiesBut.Click();
+
+            // Продажба - <a href="/properties/sales/София (столица)/София/София/София" data-container="PropertySale">Продажба</a>
+            IWebElement salesElement = driver.FindElement(By.CssSelector("a[href^='/properties/sales/София']"));
+            
+
+
+            // Наем - <a href="/properties/rentals/София (столица)/София/София/София" data-container="GiveARent">Наем</a>
+            IWebElement rentalsElement = driver.FindElement(By.CssSelector("a[href^='/properties/rentals/']"));
+            
+
+            // Услуги - <a href="/service">Услуги</a>
+            IWebElement serviceElement = driver.FindElement(By.CssSelector("a[href='/service']"));
+            
+
+            // Въпроси - <a href="/faq">Въпроси</a>
+            IWebElement faqElement = driver.FindElement(By.CssSelector("a[href='/faq']"));
+            
+
+            // За нас - <a href="/about">За нас</a>
+            IWebElement aboutElement = driver.FindElement(By.CssSelector("a[href='/about']"));
+            
+
+            // Брокери - <a href="/broker">Брокери</a>
+            IWebElement brokerElement = driver.FindElement(By.CssSelector("a[href='/broker']"));
+            
+
+            // Контакти - <a href="/contact">Контакти</a> 
+            IWebElement contactElement = driver.FindElement(By.CssSelector("a[href='/contact']"));
+           
+
+            if (salesElement.Displayed)
+            {
+                if (rentalsElement.Displayed)
+                {
+                    if (serviceElement.Displayed)
+                    {
+                        if (faqElement.Displayed)
+                        {
+                            if (aboutElement.Displayed)
+                            {
+                                if (brokerElement.Displayed)
+                                {
+                                    if (contactElement.Displayed)
+                                    {
+                                        elementsDisplayed = true;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception("Button Contact is not displayed");
+                                    }
+                                }
+                                else
+                                {
+                                    throw new Exception("Button Broker is not displayed");
+                                }                
+                            }
+                            else
+                            {
+                                throw new Exception("Button Faq is not displayed!");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Button Faq is not displayed!");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Button Service is not displayed!");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Button Rentals on is not diplayed!");
+                }
+
+            }
+            else
+            {
+                throw new Exception("Button Sales is not displayed");
+            }
+        
+
+
+            Thread.Sleep(5000);
+            //TestCleanUp
+            DriverCleanUp(driver);
+            if (elementsDisplayed)
+            {
+                Console.WriteLine("All elements in header of "+urlToOpen+" are displayed");
+            }
+
+            return elementsDisplayed;
 
         }
 
