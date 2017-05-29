@@ -73,5 +73,14 @@ namespace AutoTests
             Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_PropertyAssessment")).Selected, true);
             EndDriver(driver);
         }
+
+        //[Test]
+        //[TestCaseData(1)] string s="https://yavlenawebsite.melontech.com/broker/";
+        //public void ()
+        //Choose at least 5 pages, and on each of them check all the Header links are present
+        //Hint: use[TestCaseData] without ExpectedReuslt part.Pass the address of the page you are testing as String argument of the test.
+
+
+
     }
 }
