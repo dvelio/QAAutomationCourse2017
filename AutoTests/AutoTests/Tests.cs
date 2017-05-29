@@ -52,6 +52,7 @@ namespace AutoTests
 
             String url = "https://yavlenawebsite.melontech.com";
             IWebDriver driver = new ChromeDriver();
+            driver.Manage().Window.Size = new System.Drawing.Size(1024, 968);
             driver.Navigate().GoToUrl(url);
             Thread.Sleep(3000);
 
@@ -87,70 +88,7 @@ namespace AutoTests
            
         }
 
-        [Test]
-        public void HomeWorkStefanS()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("област Пловдив, Пловдив");
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
-            Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
-        }
-        [Test]
-        public void RentalsStefan()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Cookies.DeleteAllCookies();
-            Thread.Sleep(5000);
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist/");
-            driver.FindElement(By.CssSelector("[href*='/propertylist/rentals/']")).Click();
-            driver.FindElement(By.XPath("//form/p[2]/a[1]")).Click();
-            driver.FindElement(By.XPath("//*[contains(text(),'Едностаен апартамент')]")).Click();
-            driver.FindElement(By.XPath("//form/p[4]/a[5]")).Click();
-            driver.FindElement(By.CssSelector("[href*='/propertylist/rentals/vidin/vidin/quarter/residentialproperties/onebedroomapartment/']")).Click();
-            driver.FindElement(By.CssSelector(".green-btn")).Click();
-            Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
-
-        }
-        [Test]
-        public void ZdelkaStefan()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
-            driver.FindElement(By.XPath("//*[contains(text(),'Съдействие при сделка')]")).Click();
-            driver.FindElement(By.XPath("//div/label[7]/div[@class='icheckbox_flat-green checked']"));
-               
-            driver.Close();
-            driver.Quit();
-
-        }
-        [Test]
-        public void BrokerStefan()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
-            driver.FindElement(By.XPath("//div[2]/section/div[4]/a"));
-
-            string[] arr = { "Аделина Янева", "Александър Кръстев", "Александър Младенов", "Ангел Стаменов" };
-            for (var i = 0; i<=arr.Length-1; i++)
-            {
-                driver.FindElement(By.CssSelector(".input-search")).Clear();
-                driver.FindElement(By.CssSelector(".input-search")).SendKeys(arr[i]);
-                Thread.Sleep(3000);
-                Assert.AreEqual(driver.FindElement(By.CssSelector("#brokers-grid-holder > div > div > article > div > div > div.header-group > h3 > a")).GetAttribute("title"), arr[i]);
-                Thread.Sleep(3000);
-            }
-            driver.Close();
-            driver.Quit();
-        }
+ 
         [Test]
         public void NewHome()
         {
@@ -204,66 +142,6 @@ namespace AutoTests
 
         }
         [Test]
-        public void HW2EDLocatorsByName()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("dropdown-trigger")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("green-btn")).Click();
-            Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
-        }
-        [Test]
-        public void HW3EDCssSelectors()
-        //Selected number 10125
-        // 1. Opens the url
-        // 2. Clicks on the respective Услуга, Тип имот, Вид имот, Област,  град depending on your number and choice of City
-        // 3. Click on “Свържи се с брокер” button for the (preferably) second property in the list
-        // Commit and push the test
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
-            Thread.Sleep(3000);
-            driver.FindElement(By.CssSelector("[href *= '/propertylist/sales/']")).Click();
-            driver.FindElement(By.XPath("//form/p[2]/a[1]")).Click();
-            driver.FindElement(By.XPath("/html/body/div2/div/section/div/div/div/div/form/p[2]/a[1]")).Click();
-            driver.FindElement(By.XPath("//form/p[4]/a[2]")).Click();
-            driver.FindElement(By.XPath("//*[contains(text(),'к.к. Слънчев бряг')]")).Click();
-            driver.FindElement(By.CssSelector("[href *= 'propertylist/sales/burgas/sunny-beach-resort-area/quarter/residentialproperties/room/seaside-holiday-property/']")).Click();
-            driver.FindElement(By.XPath("")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icon - search____ICON")).Click();
-            driver.Close();
-            driver.Quit();
-
-        }
-        [Test]
-        public void HW4EDCssSelectors()
-        //1.Open https://yavlenawebsite.melontech.com/service/
-        //2. On the left there are links to different services
-        //3. Click Rent 
-        //4. After clicking on the link for the service new webpage is opened. On the newly opened page make sure the correct checkbox is ticked: next to the service you choose in the previous screen
-
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
-            Thread.Sleep(3000);
-            driver.FindElement(By.CssSelector("[href *= '/service/forrent']")).Click();
-            Thread.Sleep(3000);
-            Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_PropertyAssessment")).Selected, true);
-        }
-
-
-
-
-        [Test]
         public void HW1Dido()
         {
             IWebDriver driver = new ChromeDriver();
@@ -307,95 +185,6 @@ namespace AutoTests
             Assert.AreEqual(driver.FindElement(By.Id("OwnerContact.GiveARentProperty")).Selected, true);
             driver.Close();
             driver.Quit();
-
-    }
-
-        [Test]
-        public void HW1Mitko()
-        {
-            IWebDriver driver = new ChromeDriver();
-            //driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitlyWait(System.TimeSpan.FromSeconds(10));
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            //Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("Pavlovo");
-            //Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
-            //Thread.Sleep(3000);
-            driver.FindElement(By.Id("searchBox-validation"));
-            //Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("ui-autocomplete-input")).Clear();
-            //Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("Павлово");
-            //Thread.Sleep(3000);
-            driver.FindElement(By.Id("ui-id-2")).Click();
-            //Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
-            //Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("brand")).Click();
-            //Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("map-search")).Click();
-            //Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
-        }
-
-        [Test]
-        public void HW3Mitko()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
-            driver.Manage().Window.Maximize();
-            driver.FindElement(By.CssSelector("a.offer_filter_btn:nth-of-type(1)")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.CssSelector("a.offer_filter_btn:nth-of-type(4)")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//form/p[3]/a[3]")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//form/p[4]/a[7]")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[text()='Парцел']")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//form/p[5]/a[98]")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[text()='Свържи се с брокер']")).Click();
-            Thread.Sleep(3000);
-        }
-            [Test]
-        public void HW4Dido()
-
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
-            driver.Manage().Window.Maximize();
-            Thread.Sleep(1000);
-            driver.FindElement(By.CssSelector(".hide-cookies-message")).Click();
-            IWebElement scroll = driver.FindElement(By.Id("searchBox"));
-            scroll.Click();
-            scroll.SendKeys(Keys.PageDown);
-            Thread.Sleep(3000);
-            driver.FindElement(By.CssSelector("div.load-more-brokers a")).Click();
-            scroll.SendKeys(Keys.PageUp);
-            Thread.Sleep(3000);
-            IList <IWebElement> List = driver.FindElements(By.CssSelector("article.broker-card h3.name a"));
-            Thread.Sleep(1000);
-            ArrayList NewList = new ArrayList();
-            foreach (IWebElement UserName in List)
-            {
-                NewList.Add(UserName.Text);
-                Console.WriteLine(NewList);
-            }
-
-
-            foreach (string Name in NewList)
-            {
-                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).Clear();
-                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).SendKeys(Name);
-                Thread.Sleep(1000);
-                Assert.AreEqual(Name, driver.FindElement(By.CssSelector(".name > a:nth-child(1)")).Text);
-                Thread.Sleep(1000);
-
-            }
 
         }
         [Test]
