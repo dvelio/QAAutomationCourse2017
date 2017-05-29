@@ -20,7 +20,7 @@ namespace AutoTests
         }
         [Test]
         public void Test1()
-        { 
+        {
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("map-search")).Click();
@@ -29,11 +29,37 @@ namespace AutoTests
             EndDriver(driver);
         }
         [Test]
+        public void Test2()
+        {
+            Assert.AreEqual(2 + 2, 4);
+            Assert.That(2 + 2, Is.EqualTo(4));
+
+            StringAssert.EndsWith("BCD", "ABCD");
+            Assert.That("ABCD", Does.EndWith("BCD"));
+
+            StringAssert.Contains("BC", "ABCD");
+            Assert.That("ABCD", Does.Contain("BC"));
+
+            Assert.GreaterOrEqual(567, 100);
+            Warn.Unless(567, Is.GreaterThanOrEqualTo(1100), "FAILINGGGG");
+            Warn.If(567, Is.GreaterThanOrEqualTo(1100), "Should be passing");
+
+            Assert.That(new int[] { 1, 2, 3 }, Has.All.Positive);
+        }
+        [Test]
         public void FirstTestYavlena()
         {
+
+            String url = "https://yavlenawebsite.melontech.com";
             IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            driver.Navigate().GoToUrl(url);
             Thread.Sleep(3000);
+
+            Assert.That(driver.Url, Is.EqualTo(url));
+
+            Assert.That(driver.Url, Does.EndWith(".com"));
+            Assert.That(driver.Title, Does.Contain("Явлена"));
+
             driver.FindElement(By.ClassName("map-search")).Click();
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("dropdown-trigger")).Click();
