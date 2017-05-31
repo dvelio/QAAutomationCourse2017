@@ -186,7 +186,14 @@ namespace AutoTests
             driver.Navigate().Back();
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
         }
-
+        public void ScrollDown(IWebDriver driver)
+        {
+            var element = driver.FindElement(By.ClassName("bl-section"));               
+            OpenQA.Selenium.Interactions.Actions actions = new Actions(driver);                           
+            actions.MoveToElement(element);                                                                
+            actions.Perform();                                                                             
+            Thread.Sleep(3000);
+        }
         [Test]
         public void MouseOver()
         {
@@ -269,11 +276,7 @@ namespace AutoTests
             driver.FindElement(By.XPath("//article[contains(@class,'burgas-section')]//a[contains(text(),'жилище под наем')]")).Click();
             BackClearCookies(driver);
 
-            var element = driver.FindElement(By.ClassName("bl-section"));               // scrolling
-            OpenQA.Selenium.Interactions.Actions actions = new Actions(driver);                            // scrolling
-            actions.MoveToElement(element);                                                                // scrolling
-            actions.Perform();                                                                             // scrolling
-            Thread.Sleep(3000);
+            ScrollDown(driver);
 
             StaraZagoraOver(driver);
 
