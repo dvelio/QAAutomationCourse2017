@@ -355,6 +355,25 @@ namespace AutoTests
             driver.Quit();
         }
 
-    }
+        [Test]
+        public void LogoPresence()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            Thread.Sleep(3000);
+
+            bool isElementDisplayed = driver.FindElement(By.XPath("//*[@alt='yavlena logo']")).Displayed;
+
+            driver.Manage().Window.Size = new System.Drawing.Size(300, 968);
+
+            bool isElementDisplayedMobile = driver.FindElement(By.XPath("//*[@alt='yavlena logo']")).Displayed;
+
+            driver.Close();
+            driver.Quit();
+        }
+
+        }
 }
 
