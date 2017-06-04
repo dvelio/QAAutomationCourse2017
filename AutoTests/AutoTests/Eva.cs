@@ -18,18 +18,20 @@ namespace AutoTests
             driver.Close();
             driver.Quit();
         }
+        public void implicitWait(IWebDriver driver)
+        {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+        }
+
         [Test]
         public void HW2EDLocatorsByName()
         {
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            Thread.Sleep(3000);
+            implicitWait(driver);
             driver.FindElement(By.ClassName("dropdown-trigger")).Click();
-            Thread.Sleep(3000);
             driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
-            Thread.Sleep(3000);
             driver.FindElement(By.ClassName("green-btn")).Click();
-            Thread.Sleep(3000);
             EndDriver(driver);
         }
         [Test]
@@ -42,18 +44,14 @@ namespace AutoTests
         {
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
-            Thread.Sleep(3000);
+            implicitWait(driver);
             driver.FindElement(By.CssSelector("[href *= '/propertylist/sales/']")).Click();
             driver.FindElement(By.XPath("//form/p[2]/a[1]")).Click();
             driver.FindElement(By.XPath("/html/body/div2/div/section/div/div/div/div/form/p[2]/a[1]")).Click();
             driver.FindElement(By.XPath("//form/p[4]/a[2]")).Click();
             driver.FindElement(By.XPath("//*[contains(text(),'к.к. Слънчев бряг')]")).Click();
             driver.FindElement(By.CssSelector("[href *= 'propertylist/sales/burgas/sunny-beach-resort-area/quarter/residentialproperties/room/seaside-holiday-property/']")).Click();
-            driver.FindElement(By.XPath("")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icheckbox_flat-green")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("icon - search____ICON")).Click();
+            driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/h1")).Click();
             EndDriver(driver);
 
         }
@@ -67,18 +65,25 @@ namespace AutoTests
         {
             IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
-            Thread.Sleep(3000);
             driver.FindElement(By.CssSelector("[href *= '/service/forrent']")).Click();
-            Thread.Sleep(3000);
             Assert.AreEqual(driver.FindElement(By.Id("OwnerContact_PropertyAssessment")).Selected, true);
             EndDriver(driver);
         }
 
-        //[Test]
-        //[TestCaseData(1)] string s="https://yavlenawebsite.melontech.com/broker/";
-        //public void ()
+        //Optional Homework Week 5
+       // [Test]
+        //public void HW5EDHeaderLinks()
         //Choose at least 5 pages, and on each of them check all the Header links are present
         //Hint: use[TestCaseData] without ExpectedReuslt part.Pass the address of the page you are testing as String argument of the test.
+        //{
+            //IWebDriver driver = new ChromeDriver();
+           // driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylis");
+           // implicitWait(driver);
+           // driver.FindElement();
+       // }
+        
+
+
 
 
 

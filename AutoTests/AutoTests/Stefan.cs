@@ -181,6 +181,19 @@ namespace AutoTests
             Actions action = new Actions(driver);
             action.MoveToElement(PlovdivOver).Perform();
         }
+        public void BackClearCookies(IWebDriver driver)
+        {
+            driver.Navigate().Back();
+            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+        }
+        public void ScrollDown(IWebDriver driver)
+        {
+            var element = driver.FindElement(By.ClassName("bl-section"));               
+            OpenQA.Selenium.Interactions.Actions actions = new Actions(driver);                           
+            actions.MoveToElement(element);                                                                
+            actions.Perform();                                                                             
+            Thread.Sleep(3000);
+        }
         [Test]
         public void MouseOver()
         {
@@ -189,188 +202,178 @@ namespace AutoTests
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
             Thread.Sleep(3000);
-            
+           
             SofiaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'3-стаен до €90 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             SofiaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'2-стаен до €65 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             SofiaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'къща до €150 000 (в област София)')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             SofiaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'магазин за продажба')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             SofiaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'2-стаен (наем)')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             SofiaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'3-стаен (наем)')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click(); 
+            BackClearCookies(driver);
 
             VarnaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'2-стаен до €40 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             VarnaOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'3-стаен до €75 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             VarnaOver(driver);
            
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'жилище под наем')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();  
- 
+            BackClearCookies(driver);
+
             BurgasOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'2-стаен до €50 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             BurgasOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'3-стаен до €80 000')]")).Click();
-            driver.Navigate().Back();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
-            
+            BackClearCookies(driver);
+
             BurgasOver(driver);
 
 
             Thread.Sleep(3000);
             driver.FindElement(By.XPath("//article[contains(@class,'burgas-section')]//a[contains(text(),'жилище под наем')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click(); 
-            
-            var element = driver.FindElement(By.ClassName("bl-section"));               // scrolling
-            OpenQA.Selenium.Interactions.Actions actions = new Actions(driver);                            // scrolling
-            actions.MoveToElement(element);                                                                // scrolling
-            actions.Perform();                                                                             // scrolling
-            Thread.Sleep(3000);
+            BackClearCookies(driver);
+
+            ScrollDown(driver);
 
             StaraZagoraOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'2-стаен за продажба')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             StaraZagoraOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'3-стаен за продажба')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             StaraZagoraOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'bl-section')]//a[contains(text(),'жилище под наем')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
 
             TurnovoOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'turnovo-section')]//a[contains(text(),'2-стаен за продажба')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             TurnovoOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'turnovo-section')]//a[contains(text(),'3-стаен за продажба')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             TurnovoOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'turnovo-section')]//a[contains(text(),'жилище под наем')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             PlovdivOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'plovdiv-section ')]//a[contains(text(),'2-стаен до €50 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             PlovdivOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'plovdiv-section ')]//a[contains(text(),'3-стаен до €65 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             PlovdivOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//*[contains(text(),'къща (област Пловдив) до €70 000')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             PlovdivOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'plovdiv-section ')]//a[contains(text(),'магазин за продажба')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             PlovdivOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'plovdiv-section ')]//a[contains(text(),'2-стаен (наем)')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             PlovdivOver(driver);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[contains(@class,'plovdiv-section ')]//a[contains(text(),'3-стаен (наем)')]")).Click();
-            driver.Navigate().Back();
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            BackClearCookies(driver);
 
             driver.Close();
             driver.Quit();
         }
 
-    }
+        [Test]
+        public void LogoPresence()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            Thread.Sleep(3000);
+
+            bool isElementDisplayed = driver.FindElement(By.XPath("//*[@alt='yavlena logo']")).Displayed;
+
+            driver.Manage().Window.Size = new System.Drawing.Size(300, 968);
+
+            bool isElementDisplayedMobile = driver.FindElement(By.XPath("//*[@alt='yavlena logo']")).Displayed;
+
+            driver.Close();
+            driver.Quit();
+        }
+
+        }
 }
 
