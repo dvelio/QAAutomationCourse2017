@@ -45,26 +45,24 @@ namespace AutoTests
             Warn.If(567, Is.GreaterThanOrEqualTo(1100), "Should be passing");
 
             Assert.That(new int[] { 1, 2, 3 }, Has.All.Positive);
+            Assert.That("abbbbbcde", Does.Match("ab*cde"));
+            Assert.That("acde", Does.Match("ab*cde"));
         }
         [Test]
         public void FirstTestYavlena()
         {
-
-            String url = "https://yavlenawebsite.melontech.com";
+            String url = "https://yavlenawebsite.melontech.com/69276";
             IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Size = new System.Drawing.Size(1024, 968);
             driver.Navigate().GoToUrl(url);
             Thread.Sleep(3000);
-
             Assert.That(driver.Url, Is.EqualTo(url));
+            Assert.That(driver.Title, Does.Match(".* ID [0-9]{5} \\| Явлена"));
+            StringAssert.IsMatch(".* ID [0-9]{5} \\| Явлена", driver.Title);
 
-            Assert.That(driver.Url, Does.EndWith(".com"));
+            Assert.That(driver.Url, Does.Not.EndWith(".com"));
             Assert.That(driver.Title, Does.Contain("Явлена"));
-
-            driver.FindElement(By.ClassName("map-search")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("dropdown-trigger")).Click();
-            Thread.Sleep(3000);
+            Assert.That(driver.Title, Does.Match("Явлена"));
 
             driver.Close();
             driver.Quit();
