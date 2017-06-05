@@ -14,7 +14,9 @@ namespace AutoTests
     [TestFixture]
     public class Tests
     {
-        public void EndDriver(IWebDriver driver)
+        IWebDriver driver;
+        [TearDown]
+        public void EndDriver()
         {
             driver.Close();
             driver.Quit();
@@ -22,12 +24,11 @@ namespace AutoTests
         [Test]
         public void Test1()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("map-search")).Click();
             driver.FindElement(By.ClassName("dropdown-trigger")).Click();
             Thread.Sleep(3000);
-            EndDriver(driver);
         }
         [Test]
         public void Test2()
@@ -53,7 +54,7 @@ namespace AutoTests
         public void FirstTestYavlena()
         {
             String url = "https://yavlenawebsite.melontech.com/69276";
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Size = new System.Drawing.Size(1024, 968);
             driver.Navigate().GoToUrl(url);
             Thread.Sleep(3000);
@@ -64,28 +65,24 @@ namespace AutoTests
             Assert.That(driver.Url, Does.Not.EndWith(".com"));
             Assert.That(driver.Title, Does.Contain("Явлена"));
             Assert.That(driver.Title, Does.Match("Явлена"));
-
-            driver.Close();
-            driver.Quit();
         }
         [Test]
         public void YavlenaSocialFF()
         {
             String url = "https://yavlenawebsite.melontech.com/69276";
-            IWebDriver driver = new FirefoxDriver();
+            driver = new FirefoxDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Manage().Window.Size = new System.Drawing.Size(1280, 968);
             driver.Navigate().GoToUrl(url);
             IWebElement socialHeading = driver.FindElement(By.CssSelector("div.social-block h4"));
             String socialHeadingText = socialHeading.Text;
             Assert.That(socialHeadingText, Is.EqualTo("Следвайте ни"));
-            driver.Close();
-            driver.Quit();
+
         }
         [Test]
         public void HW1Dido()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.Manage().Window.Maximize();
             driver.FindElement(By.Id("searchBox")).SendKeys("София");
@@ -98,7 +95,7 @@ namespace AutoTests
         [Test]
         public void HW2Dido()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist/");
             driver.Manage().Window.Maximize();
             driver.FindElement(By.XPath("/html/body/div[2]/div/section/div/div/div/div/aside/form/p[1]/a[1]")).Click();
@@ -118,7 +115,7 @@ namespace AutoTests
         [Test]
         public void HW3Dido()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
             driver.Manage().Window.Maximize();
             driver.FindElement(By.XPath("/ html / body / div[2] / div / section[1] / aside[1] / nav / ul / li[5] / a")).Click();
@@ -131,7 +128,7 @@ namespace AutoTests
         [Test]
         public void HWPeter1()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/");
             driver.Manage().Window.Maximize();
             Thread.Sleep(3000);
@@ -147,7 +144,7 @@ namespace AutoTests
         [Test]
         public void HWPeter2()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
             driver.Manage().Window.Maximize();
             Thread.Sleep(3000);
