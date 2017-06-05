@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections;
@@ -67,77 +68,19 @@ namespace AutoTests
             driver.Close();
             driver.Quit();
         }
-
         [Test]
-        public void Lesson2HoomeWork()
+        public void YavlenaSocialFF()
         {
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("map-search")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.ClassName("brand")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.Id("searchBox")).Click();
-            driver.FindElement(By.Id("searchBox")).SendKeys("Sofia");
-            Thread.Sleep(3000);
+            String url = "https://yavlenawebsite.melontech.com/69276";
+            IWebDriver driver = new FirefoxDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Window.Size = new System.Drawing.Size(1280, 968);
+            driver.Navigate().GoToUrl(url);
+            IWebElement socialHeading = driver.FindElement(By.CssSelector("div.social-block h4"));
+            String socialHeadingText = socialHeading.Text;
+            Assert.That(socialHeadingText, Is.EqualTo("Следвайте ни"));
             driver.Close();
             driver.Quit();
-           
-        }
-
- 
-        [Test]
-        public void NewHome()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            
-            var element = driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/h1"));               // scrolling
-            OpenQA.Selenium.Interactions.Actions actions = new Actions(driver);                            // scrolling
-            actions.MoveToElement(element);                                                                // scrolling
-            actions.Perform();                                                                             // scrolling
-            Thread.Sleep(2000);
-
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();                              //accept cookies
-            Thread.Sleep(3000);
-
-            driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/h1")).Click();
-            Thread.Sleep(3000);
-            bool isElementDisplayed=driver.FindElement(By.XPath("//div[2]/div/div/div[1]/div[1]/div/p")).Displayed;       // verify message is displayed
-            Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
-
-        }
-
-        [Test]
-        public void AllCitiesSs()
-        {
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            driver.FindElement(By.ClassName("hide-cookies-message")).Click();                              //accept cookies
-            Thread.Sleep(3000);
-            driver.FindElement(By.CssSelector(".all-cities.cities-btn")).Click();
-            Thread.Sleep(3000);
-
-            IWebElement body = driver.FindElement(By.XPath("//*[contains(text(),'Царево')]"));       //open link in new tab
-            body.SendKeys(Keys.Control.ToString() + 't');                                            //open link in new tab
-            Actions action = new Actions(driver);                                                    //open link in new tab
-            action.KeyDown(Keys.Control).MoveToElement(body).Click().Perform();                      //open link in new tab
-
-
-            driver.SwitchTo().Window(driver.WindowHandles.LastOrDefault());                       // switch tab
-            Thread.Sleep(3000);
-            driver.FindElement(By.CssSelector(".view-mode:nth-child(1)")).Click();                // view by list
-            Thread.Sleep(3000);
-
-            driver.FindElement(By.CssSelector("[href*='/broker/sendmessageforproperty?brokerId=FB2CD300-4BF0-43C5-953D-750ACD624169&serviceId=6df97f77-0b50-45d7-81b6-29c7873acc85']")).Click();
-            driver.Close();
-            driver.Quit();
-
         }
         [Test]
         public void HW1Dido()
