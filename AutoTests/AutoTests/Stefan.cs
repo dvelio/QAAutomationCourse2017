@@ -15,25 +15,31 @@ namespace AutoTests
 
     public class Stefan
     {
+        IWebDriver driver;
+        [TearDown]
+        public void TestTearDown()
 
+        {
+            driver.Close();
+            driver.Quit();
+        }
 
         [Test]
         public void HomeWorkStefanS()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
             driver.FindElement(By.ClassName("ui-autocomplete-input")).SendKeys("област Пловдив, Пловдив");
             Thread.Sleep(3000);
             driver.FindElement(By.ClassName("icon-search____ICON")).Click();
             Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
+            
         }
         [Test]
         public void RentalsStefan()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
             Thread.Sleep(5000);
@@ -45,28 +51,24 @@ namespace AutoTests
             driver.FindElement(By.CssSelector("[href*='/propertylist/rentals/vidin/vidin/quarter/residentialproperties/onebedroomapartment/']")).Click();
             driver.FindElement(By.CssSelector(".green-btn")).Click();
             Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
 
         }
         [Test]
         public void ZdelkaStefan()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
             driver.FindElement(By.XPath("//*[contains(text(),'Съдействие при сделка')]")).Click();
             driver.FindElement(By.XPath("//div[@class='icheckbox_flat-green checked']"));
 
-            driver.Close();
-            driver.Quit();
 
         }
         [Test]
         public void BrokerStefan()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
@@ -81,13 +83,12 @@ namespace AutoTests
                 Assert.AreEqual(driver.FindElement(By.CssSelector("#brokers-grid-holder > div > div > article > div > div > div.header-group > h3 > a")).GetAttribute("title"), arr[i]);
                 Thread.Sleep(3000);
             }
-            driver.Close();
-            driver.Quit();
+            
         }
         [Test]
         public void NewHome()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
 
@@ -106,15 +107,13 @@ namespace AutoTests
             //bool isElementDisplayed = driver.FindElement(By.XPath("//h1[contains(@class,'home-title')]/../div[@class='seo-text-wrapper']")).Displayed;       // verify message is displayed
             //Assert.AreEqual(false, isElementDisplayed);
             Thread.Sleep(3000);
-            driver.Close();
-            driver.Quit();
-
+           
         }
 
         [Test]
         public void AllCitiesSs()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();                              //accept cookies
@@ -136,9 +135,7 @@ namespace AutoTests
             //driver.FindElement(By.CssSelector("[href*='/broker/sendmessageforproperty?brokerId=FB2CD300-4BF0-43C5-953D-750ACD624169&serviceId=6df97f77-0b50-45d7-81b6-29c7873acc85']")).Click(); //abc
             driver.FindElement(By.CssSelector(".list-results-list article:nth-of-type(3) a.green-btn.broker-link")).Click();
 
-            driver.Close();
-            driver.Quit();
-
+       
         }
 
 
@@ -197,7 +194,7 @@ namespace AutoTests
         [Test]
         public void MouseOver()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
@@ -351,14 +348,12 @@ namespace AutoTests
             driver.FindElement(By.XPath("//article[contains(@class,'plovdiv-section ')]//a[contains(text(),'3-стаен (наем)')]")).Click();
             BackClearCookies(driver);
 
-            driver.Close();
-            driver.Quit();
         }
 
         [Test]
         public void LogoPresence()
         {
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
@@ -370,10 +365,27 @@ namespace AutoTests
 
             bool isElementDisplayedMobile = driver.FindElement(By.XPath("//*[@alt='yavlena logo']")).Displayed;
 
-            driver.Close();
-            driver.Quit();
+            
         }
+        [Test]
+        public void home()
+        {
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/properties/all/sofia/sofia/?view=Hybrid");
+
+            driver.FindElement(By.XPath("//input[@placeholder='Тип имот']")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.XPath("//*(@class='iCheck-helper')")).Click();
+            Thread.Sleep(9000);
+
 
         }
+
+
+
+
+
+    }
 }
 
