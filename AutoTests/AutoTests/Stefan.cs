@@ -139,7 +139,13 @@ namespace AutoTests
         }
 
 
+        public void CityOver(IWebDriver driver, String cityName)
+        {
+            IWebElement sofiaOver = driver.FindElement(By.ClassName(cityName + "-section"));
+            Actions action = new Actions(driver);
+            action.MoveToElement(sofiaOver).Perform();
 
+        }
         public void SofiaOver(IWebDriver driver)
         {
             IWebElement sofiaOver = driver.FindElement(By.ClassName("sofia-section"));
@@ -190,6 +196,25 @@ namespace AutoTests
             actions.MoveToElement(element);                                                                
             actions.Perform();                                                                             
             Thread.Sleep(3000);
+        }
+        [TestCase("3-стаен до €90 000")]
+        [Test]
+        public void MouseOverSofia(String linkText)
+        {
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            driver.FindElement(By.ClassName("hide-cookies-message")).Click();
+            Thread.Sleep(3000);
+
+            SofiaOver(driver);
+
+            Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
+            driver.FindElement(By.XPath("//article[@class='sofia-section]//*[contains(text(),'" + linkText + "')]")).Click();
+            //driver.FindElement(By.LinkText(linkText)).Click();
+            driver.FindElement(By.PartialLinkText(linkText)).Click();
+            BackClearCookies(driver);
+
         }
         [Test]
         public void MouseOver()
@@ -376,7 +401,7 @@ namespace AutoTests
 
             driver.FindElement(By.XPath("//input[@placeholder='Тип имот']")).Click();
             Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*(@class='iCheck-helper')")).Click();
+            driver.FindElement(By.Id("PropertyTypes_Groups_0__Types_0__IsSelected")).FindElement(By.XPath("..")).FindElement(By.CssSelector("ins.iCheck-helper")).Click();
             Thread.Sleep(9000);
 
 
