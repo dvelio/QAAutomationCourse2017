@@ -20,7 +20,7 @@ namespace AutoTests
         }
         public void implicitWait(IWebDriver driver)
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace AutoTests
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylis");
             implicitWait(driver);
             //check the elements in the Header
-            Assert.AreEqual(driver.FindElement(By.CssSelector("a[href^='/properties/sales/София']")).GetAttribute("Продажба"),true);
+            Assert.AreEqual(driver.FindElement(By.CssSelector("a[href^='/properties/sales/София']")).Selected,true);
             Assert.AreEqual(driver.FindElement(By.CssSelector("a[href^='/properties/rentals/']")).GetAttribute("Наем"), true);
             //Assert.AreEqual(driver.FindElement(By.CssSelector("a[href='/service']")));
             //Assert.AreEqual(driver.FindElement(By.CssSelector("a[href='/faq']")));
@@ -88,7 +88,6 @@ namespace AutoTests
             //Assert.AreEqual(driver.FindElement(By.CssSelector("a[href='/contact']")));
             EndDriver(driver);
         }
-
 
     }
 }
