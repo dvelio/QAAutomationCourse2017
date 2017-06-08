@@ -197,9 +197,9 @@ namespace AutoTests
             actions.Perform();                                                                             
             Thread.Sleep(3000);
         }
-        [TestCase("3-стаен до €90 000")]
+        [TestCase("3-стаен до €90 000", "sofia")]
         [Test]
-        public void MouseOverSofia(String linkText)
+        public void MouseOverSofia(String linkText, String city)
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
@@ -207,7 +207,7 @@ namespace AutoTests
             driver.FindElement(By.ClassName("hide-cookies-message")).Click();
             Thread.Sleep(3000);
 
-            SofiaOver(driver);
+            CityOver(driver, city);
 
             Thread.Sleep(3000);       // implicity wait doesnt work at this plase since it gives an result that the element bellow is not visible
             driver.FindElement(By.XPath("//article[@class='sofia-section]//*[contains(text(),'" + linkText + "')]")).Click();
