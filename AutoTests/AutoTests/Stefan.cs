@@ -392,8 +392,16 @@ namespace AutoTests
 
             
         }
+        [TestCase("ConstructionTypes_0__IsSelected")]
+        [TestCase("ConstructionTypes_1__IsSelected")]
+        [TestCase("ConstructionTypes_2__IsSelected")]
+        [TestCase("ConstructionTypes_3__IsSelected")]
+        [TestCase("ConstructionTypes_4__IsSelected")]
+        [TestCase("ConstructionTypes_5__IsSelected")]
+        [TestCase("HasElevator")]
+        [TestCase("HasGarage")]
         [Test]
-        public void home()
+        public void home(String Stroitelstvo)
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
@@ -401,7 +409,14 @@ namespace AutoTests
 
             driver.FindElement(By.XPath("//input[@placeholder='Тип имот']")).Click();
             Thread.Sleep(3000);
-            driver.FindElement(By.Id("PropertyTypes_Groups_0__Types_0__IsSelected")).FindElement(By.XPath("..")).FindElement(By.CssSelector("ins.iCheck-helper")).Click();
+            driver.FindElement(By.Id("PropertyTypes_Groups_0__Types_2__IsSelected")).FindElement(By.XPath("..")).FindElement(By.CssSelector("ins.iCheck-helper")).Click();
+            driver.FindElement(By.Id("PropertyTypes_Groups_0__Types_3__IsSelected")).FindElement(By.XPath("..")).FindElement(By.CssSelector("ins.iCheck-helper")).Click();
+            driver.FindElement(By.Id("PropertyTypes_Groups_0__Types_4__IsSelected")).FindElement(By.XPath("..")).FindElement(By.CssSelector("ins.iCheck-helper")).Click();
+            driver.FindElement(By.XPath("//input[@placeholder='Още']")).Click();
+            Thread.Sleep(3000);
+            
+            driver.FindElement(By.Id(Stroitelstvo)).FindElement(By.XPath("..")).FindElement(By.CssSelector("ins.iCheck-helper")).Click();
+
             Thread.Sleep(9000);
 
 
