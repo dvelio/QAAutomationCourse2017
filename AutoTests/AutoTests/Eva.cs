@@ -71,20 +71,23 @@ namespace AutoTests
         }
 
         //Optional Homework Week 5
-       // [Test]
-        //public void HW5EDHeaderLinks()
+       [Test]
+       public void HW5EDHeaderLinks()
         //Choose at least 5 pages, and on each of them check all the Header links are present
         //Hint: use[TestCaseData] without ExpectedReuslt part.Pass the address of the page you are testing as String argument of the test.
-        //{
-            //IWebDriver driver = new ChromeDriver();
-           // driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylis");
-           // implicitWait(driver);
-           // driver.FindElement();
-       // }
-        
-
-
-
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylis");
+            implicitWait(driver);
+            //check the elements in the Header
+            Assert.AreEqual(driver.FindElement(By.CssSelector("a[href^='/properties/sales/София']")).GetAttribute("Продажба"),true);
+            Assert.AreEqual(driver.FindElement(By.CssSelector("a[href^='/properties/rentals/']")).GetAttribute("Наем"), true);
+            //Assert.AreEqual(driver.FindElement(By.CssSelector("a[href='/service']")));
+            //Assert.AreEqual(driver.FindElement(By.CssSelector("a[href='/faq']")));
+            //Assert.AreEqual(driver.FindElement(By.CssSelector("a[href='/about']")));
+            //Assert.AreEqual(driver.FindElement(By.CssSelector("a[href='/contact']")));
+            EndDriver(driver);
+        }
 
 
     }
