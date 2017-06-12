@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections;
@@ -10,13 +13,92 @@ using System.Threading;
 
 namespace AutoTests
 {
+
+
+
+
     [TestFixture]
     public class Tsani
     {
-        [Test]
-        public void Lesson2HoomeWork()
+        IWebDriver driver;
+        //private static int webView;
+        int webView;
+
+        [OneTimeSetUp]
+        
+        public void Setup()
+
         {
-            IWebDriver driver = new ChromeDriver();
+            
+            // Setup constant to change Web to Mobile view (neede in some test)
+            webView = 1200;
+            
+        }
+
+        
+
+        //[OneTimeTearDown]
+        //public void TearDownF()
+        //{
+        //    //
+        //}
+
+
+
+        [Test]
+        // Create a test to check element that is changing from Desktop to Mobile view
+        // Create a test to click on the “Продажба” link in the header of the website.The test should be valid for both Desktop and Mobile view
+        [TestCase(600, 800)]
+        [TestCase(1900, 940)]
+
+        public void YavlenaSells(int X, int Y)
+        {
+            Assert.That(new int[] { X, Y }, Has.All.Positive, "Dimensions are not  positive numbers!");
+
+            driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
+            driver.Manage().Window.Size = new System.Drawing.Size(X, Y);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            // match substring as prefix
+            IWebElement cookiesBut = driver.FindElement(By.CssSelector("*[class^='hide-cookies-message']"));
+            cookiesBut.Click();
+            Thread.Sleep(1000);
+
+
+            // In case of mobile view, user should click on the hamburger menu button
+            if (X < webView)
+            {
+                Console.WriteLine("Mobile view testing");
+
+                // Mobile Menu 
+                IWebElement mobileMenuElement = driver.FindElement(By.CssSelector("div.mobile-nav-trigger > a"));
+                Assert.That(mobileMenuElement.Displayed, Is.True, "Hamburher Menu button is not displayed in Mobile view!");
+                mobileMenuElement.Click();
+                Thread.Sleep(1000);
+
+
+                // Продажба 
+                IWebElement salesDescElement = driver.FindElement(By.CssSelector("a[href^='/properties/sales/']"));
+                Assert.That(salesDescElement.Displayed, Is.True, "Продажби is not displayed in Desktop view of site!");
+                salesDescElement.Click();
+
+            }
+            else
+            {
+
+                // Продажба 
+
+                IWebElement salesDescElement = driver.FindElement(By.CssSelector("a[href^='/properties/sales/']"));
+                Assert.That(salesDescElement.Displayed, Is.True, "Продажби is not displayed in Desktop view of site!");
+                salesDescElement.Click();
+            }
+
+        }
+
+        public void Lesson2HomeWork()
+        {
+            driver = new ChromeDriver();
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
@@ -24,8 +106,7 @@ namespace AutoTests
             driver.FindElement(By.ClassName("brand")).Click();
             driver.FindElement(By.Id("searchBox")).Click();
             driver.FindElement(By.Id("searchBox")).SendKeys("Sofia");
-            //TestCleanUp
-            DriverCleanUp(driver);
+        
 
         }
 
@@ -49,7 +130,7 @@ namespace AutoTests
 
             string url = "https://yavlenawebsite.melontech.com/propertylist";
 
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl(url);
             driver.Manage().Window.Maximize();
@@ -82,7 +163,7 @@ namespace AutoTests
 
 
             // Find by cssLocator
-            //string cssPropery = "a[href='/propertylist/rentals/district/location/quarter/commercialproperties/restaurant/']";
+            //string cssProperty = "a[href='/propertylist/rentals/district/location/quarter/commercialproperties/restaurant/']";
             //FindByCssLocatorAndClick(driver, cssProperty);
 
             // Област = 90 (всички области са 28 - деля 90 на 28 и остатъкът е 6 - значи 6 та област - Враца
@@ -119,9 +200,6 @@ namespace AutoTests
             else
             { links[0].Click(); }
 
-            //TestCleanUp
-            DriverCleanUp(driver);
-
 
         }
 
@@ -139,7 +217,7 @@ namespace AutoTests
             // 1.Open https://yavlenawebsite.melontech.com/service/
             string url = "https://yavlenawebsite.melontech.com/service/";
 
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Navigate().GoToUrl(url);
             driver.Manage().Window.Maximize();
@@ -158,11 +236,6 @@ namespace AutoTests
                 Console.WriteLine("Is not selected");
                 throw new Exception("Not checked");
             }
-
-
-            //TestCleanUp
-            DriverCleanUp(driver);
-
 
         }
 
@@ -184,7 +257,7 @@ namespace AutoTests
             //1.Open https://yavlenawebsite.melontech.com/broker/
             string url = "https://yavlenawebsite.melontech.com/broker/";
 
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
            
             driver.Navigate().GoToUrl(url);
             driver.Manage().Window.Maximize();
@@ -252,8 +325,6 @@ namespace AutoTests
                 Thread.Sleep(2000);
 
             }
-            //TestCleanUp
-            DriverCleanUp(driver);
 
 
         }
@@ -280,7 +351,7 @@ namespace AutoTests
             bool elementsDisplayed = true;
             Console.WriteLine("Test of :"+'\n'+urlToOpen);
             Console.WriteLine("Result:");
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(urlToOpen);
             driver.Manage().Window.Maximize();
@@ -375,8 +446,6 @@ namespace AutoTests
 
 
             Thread.Sleep(5000);
-            //TestCleanUp
-            DriverCleanUp(driver);
             if (elementsDisplayed)
             {
                 Console.WriteLine("All elements in header of "+urlToOpen+" are displayed");
@@ -406,7 +475,7 @@ namespace AutoTests
 
 
            
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(urlToOpen);
             driver.Manage().Window.Maximize();
@@ -447,10 +516,6 @@ namespace AutoTests
             bool allElementsShown = salesElement.Displayed && rentalsElement.Displayed && serviceElement.Displayed && faqElement.Displayed && aboutElement.Displayed && brokerElement.Displayed  && contactElement.Displayed;
 
             Assert.AreEqual(true, allElementsShown, "Elements - Продажба , Наем, Услуги, Въпроси, За нас, Брокери, Контакти are not displayed!");
-
-
-            //TestCleanUp
-            DriverCleanUp(driver);
            
 
         }
@@ -471,7 +536,7 @@ namespace AutoTests
             //1.Open https://yavlenawebsite.melontech.com/broker/
             string url = "https://yavlenawebsite.melontech.com/broker/";
 
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl(url);
             driver.Manage().Window.Maximize();
@@ -524,10 +589,6 @@ namespace AutoTests
             }
             
 
-            //TestCleanUp
-            DriverCleanUp(driver);
-
-
         }
 
         [Test]
@@ -543,7 +604,7 @@ namespace AutoTests
         {
 
             Assert.That(new int[] { X, Y }, Has.All.Positive, "Dimensions are not  positive numbers!"); 
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
             driver.Manage().Window.Size = new System.Drawing.Size(X,Y);
@@ -558,8 +619,6 @@ namespace AutoTests
             IWebElement logoElement = driver.FindElement(By.CssSelector("div.brand > a[href='/'"));          
             Assert.That(logoElement.Displayed,Is.True, "Logo is not displayed in size " + X + " x " + Y);
 
-            //TestCleanUp
-            DriverCleanUp(driver);
 
             Thread.Sleep(6000);
 
@@ -567,88 +626,130 @@ namespace AutoTests
         }
 
 
-        [Test]
-        // Create a test to check element that is changing from Desktop to Mobile view
-        // Create a test to click on the “Продажба” link in the header of the website.The test should be valid for both Desktop and Mobile view
-        [TestCase(600, 800)]
-        [TestCase(1900, 940)]
-        
 
-        public void YavlenaSells(int X, int Y)
+       
+        // Choose one of your tests, and make it run on Chrome, FireFox and IE
+        [TestCase("Chrome")]
+        [TestCase("Firefox")]
+        // If there is a problem to get browser IE11 - opne Internet Options - Security. Then for all Tabs - Internet , Local intranet ... please check "Enable Protected Mode "
+        [TestCase("IE")]
+        public void RunInDifferentBrowsers(string browser)
         {
-            Assert.That(new int[] { X, Y }, Has.All.Positive, "Dimensions are not  positive numbers!");
+            switch (browser)
+            {
+                case "Chrome":
+                    driver = new ChromeDriver();
+                    break;
+                case "Firefox":
+                    driver = new FirefoxDriver();
+                    break;
+                case "IE":
+                    driver = new InternetExplorerDriver();
+                    break;
+                default:
+                    Console.WriteLine("Unknown borwser! This case will run in the default browser " + browser);
+                    driver = new ChromeDriver();
+                    break;
+            }
 
-            IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            driver.Manage().Window.Size = new System.Drawing.Size(X, Y);
+            // https://yavlenawebsite.melontech.com/propertylist
+            // Digit 1: Услуга
+            // Digit 2: Тип имот
+            // Digit 3: Вид имот
+            // Digit 4+5: Област
+            // Choose “Град“ that has some properties
+
+            // Create a test that:
+            // Opens the url
+            // Clicks on the respective Услуга, Тип имот, Вид имот, Област,  град depending on your number and choice of City
+            // Click on “Свържи се с брокер” button for the (preferably) second property in the list 
+            // Commit and push the test
+            // Tsanka - 67890
+            string url = "https://yavlenawebsite.melontech.com/propertylist";
+
+
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
-            // match substring as prefix
-            IWebElement cookiesBut = driver.FindElement(By.CssSelector("*[class^='hide-cookies-message']"));
-            cookiesBut.Click();
-            Thread.Sleep(1000);
+            driver.Navigate().GoToUrl(url);
+            driver.Manage().Window.Maximize();
 
 
-            // In case of mobile view, user should click on the hamburger menu button
-            if (X < 1200)
+            // Usluga = 6 - Отговаря на Наем
+
+            string cssService = "a[href^='/propertylist/rentals/']";
+            FindByCssLocatorAndClick(driver, cssService);
+
+            // Тип имот = 7 -  Бизнес имоти
+
+            string cssTypeProperty = "a[href='/propertylist/rentals/district/location/quarter/commercialproperties/']";
+            FindByCssLocatorAndClick(driver, cssTypeProperty);
+
+            // Вид имот = 8  - Заведение
+
+            string cssProperty = "a[href='/propertylist/rentals/district/location/quarter/commercialproperties/restaurant/']";
+            FindByCssLocatorAndClick(driver, cssProperty);
+
+            // Област = 90 (всички области са 28 - деля 90 на 28 и остатъкът е 6 - значи 6 та област - Враца
+
+            string cssDistrict = "a[href='/propertylist/rentals/vratsa/location/quarter/commercialproperties/restaurant/']";
+            FindByCssLocatorAndClick(driver, cssDistrict);
+
+
+            // Град - Враца
+
+            string cssCity = "a[href='/propertylist/rentals/vratsa/vratsa/quarter/commercialproperties/restaurant/']";
+            FindByCssLocatorAndClick(driver, cssCity);
+
+
+            // Втори резултат - ако няма такъв , да се кликне на първия
+            // 3.After clicking on the link for the service new webpage is opened.On the newly opened page make sure the correct checkbox is ticked: next to the service you chose in the previous screen
+
+            IList<IWebElement> links = driver.FindElements(By.LinkText("Свържи се с брокер"));
+            int i = links.Count;
+            if (i == 0)
             {
-                Console.WriteLine("Mobile view testing");
-                
-                // Mobile Menu 
-                IWebElement mobileMenuElement = driver.FindElement(By.CssSelector("div.mobile-nav-trigger > a"));
-                Assert.That(mobileMenuElement.Displayed, Is.True, "Hamburher Menu button is not displayed in Mobile view!");
-                mobileMenuElement.Click();
-                Thread.Sleep(1000);
-
-
-                // Продажба 
-                IWebElement salesElement = driver.FindElement(By.CssSelector("a[href^='/properties/sales/']"));
-                Assert.That(salesElement.Displayed, Is.True, "Продажби is not displayed in Mobile view of site!");
-                salesElement.Click();
-
+                throw new Exception("No results");
             }
+            else if (i >= 2)
+            { links[1].Click(); }
             else
-            {
-                Console.WriteLine("Desktop view testing");
-                // Продажба 
-                IWebElement salesDescElement = driver.FindElement(By.CssSelector("a[href^='/properties/sales/']"));
-                Assert.That(salesDescElement.Displayed, Is.True, "Продажби is not displayed in Desktop view of site!");
-                salesDescElement.Click();
+            { links[0].Click(); }
 
-            }
-
-            //TestCleanUp
-            DriverCleanUp(driver);
 
         }
 
-        public static void FindByAndClick(IWebDriver myDriver, By byLocator)
+
+
+
+        public void FindByAndClick(IWebDriver myDriver, By byLocator)
         {
             IWebElement cssElement = myDriver.FindElement(byLocator);
             cssElement.Click();
 
         }
 
-        public static void FindByCssLocatorAndClick(IWebDriver myDriver, string strToFindBy)
+        public  void FindByCssLocatorAndClick(IWebDriver myDriver, string strToFindBy)
         {
             IWebElement cssElement = myDriver.FindElement(By.CssSelector(strToFindBy));
-            Assert.That(cssElement.Displayed, Is.True, "Element in not dosplayed!");
+            Assert.That(cssElement.Displayed, Is.True, "Element is not displayed!");
             cssElement.Click();
         }
 
-        public static void FindByXpathAndClick(IWebDriver myDriver, string strToFindBy)
+        public  void FindByXpathAndClick(IWebDriver myDriver, string strToFindBy)
         {
             IWebElement xPathElement = myDriver.FindElement(By.XPath(strToFindBy));
             Assert.That(xPathElement.Displayed, Is.True, "Element is not displayed!");
             xPathElement.Click();
         }
 
+       
 
-        public static void DriverCleanUp(IWebDriver myDriver)
-
+        [TearDown]
+        public void CleanUp()
         {
-            myDriver.Close();
-            myDriver.Quit();
+            driver.Close();
+            driver.Quit();
         }
+
+        
     }
 }
