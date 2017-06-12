@@ -7,6 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Firefox;
 
 namespace AutoTests
 {
@@ -15,12 +17,34 @@ namespace AutoTests
     public class Mitko
     {
 
-
+        IWebDriver driver;
         [Test]
         [Category("Mitko Tests")]
-        public void HW1Mitko()
+
+        [TestCase("Chrome")]
+        [TestCase("IE")]
+        [TestCase("Mozilla")]
+
+
+
+        public void HW1Mitko(string browserDriver)
         {
-            var driver = new ChromeDriver();
+            switch (browserDriver)
+            {
+                case "Chrome":
+                    driver = new ChromeDriver();
+                    break;
+                case "IE":
+                    driver = new InternetExplorerDriver();
+                    break;
+                case "Mozilla":
+                    driver = new FirefoxDriver();
+                    break;
+
+                default:
+                    driver = new ChromeDriver();
+                    break;
+            }
             driver.Manage().Window.Maximize();
             implicitWait(driver);
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
@@ -35,14 +59,36 @@ namespace AutoTests
             driver.FindElement(By.XPath("//button[@data-search-field='new-search']")).Click();
             driver.FindElement(By.XPath("//a[@alt='yavlena logo']")).Click();
             driver.FindElement(By.XPath("//a[@data-ga-action='Home Find On Map']")).Click();
-            testCleanup(driver);
+            //testCleanup(driver);
+
         }
 
         [Test]
         [Category("Mitko Tests")]
-        public void HW3Mitko()
+
+        [TestCase("Chrome")]
+        [TestCase("IE")]
+        [TestCase("Mozilla")]
+
+        public void HW3Mitko(string browserDriver)
         {
-            IWebDriver driver = new ChromeDriver();
+            switch (browserDriver)
+            {
+                case "Chrome":
+                    driver = new ChromeDriver();
+                    break;
+                case "IE":
+                    driver = new InternetExplorerDriver();
+                    break;
+                case "Mozilla":
+                    driver = new FirefoxDriver();
+                    break;
+
+                default:
+                    driver = new ChromeDriver();
+                    break;
+            }
+
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist");
             driver.FindElement(By.XPath("//a[@href='/propertylist/sales/']")).Click();
@@ -52,11 +98,13 @@ namespace AutoTests
             driver.FindElement(By.XPath("//*[text()='Парцел']")).Click();
             driver.FindElement(By.LinkText("с. Длъгня")).Click();
             driver.FindElement(By.XPath("//*[@href='/broker/sendmessageforproperty?brokerId=08D83234-57C7-4E7D-B076-2985C37C294D&serviceId=c63ee654-d763-4f3c-8143-6b973e65ebff']")).Click();
-            testCleanup(driver);
+            //testCleanup(driver);
         }
 
 
-        public void testCleanup(IWebDriver driver)
+
+        [TearDown]
+        public void testCleanup()
         {
             driver.Close();
             driver.Quit();
@@ -66,5 +114,25 @@ namespace AutoTests
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
+
+        //public void multyDriver(string browserDriver)
+        //{
+        //    switch (browserDriver)
+        //    {
+        //        case "Chrome":
+        //            driver = new ChromeDriver();
+        //            break;
+        //        case "IE":
+        //            driver = new InternetExplorerDriver();
+        //            break;
+        //        case "Mozilla":
+        //            driver = new FirefoxDriver();
+        //            break;
+
+        //        default:
+        //            driver = new ChromeDriver();
+        //            break;
+        //    }
     }
 }
+
