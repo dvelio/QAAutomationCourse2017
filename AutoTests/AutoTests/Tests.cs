@@ -77,54 +77,8 @@ namespace AutoTests
             IWebElement socialHeading = driver.FindElement(By.CssSelector("div.social-block h4"));
             String socialHeadingText = socialHeading.Text;
             Assert.That(socialHeadingText, Is.EqualTo("Следвайте ни"));
-
-        }
-        [Test]
-        public void HW1Dido()
-        {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com");
-            driver.Manage().Window.Maximize();
-            driver.FindElement(By.Id("searchBox")).SendKeys("София");
-            driver.FindElement(By.ClassName("icon-search____ICON")).Click();
-            Thread.Sleep(1000);
-            Assert.AreEqual(driver.Url, "https://yavlenawebsite.melontech.com/properties/all/%D0%A1%D0%BE%D1%84%D0%B8%D1%8F%20(%D1%81%D1%82%D0%BE%D0%BB%D0%B8%D1%86%D0%B0)/%D0%A1%D0%BE%D1%84%D0%B8%D1%8F/?view=Hybrid");
-            driver.Close();
-            driver.Quit();
-        }
-        [Test]
-        public void HW2Dido()
-        {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist/");
-            driver.Manage().Window.Maximize();
-            driver.FindElement(By.XPath("/html/body/div[2]/div/section/div/div/div/div/aside/form/p[1]/a[1]")).Click();
-            driver.FindElement(By.XPath("/html/body/div[2]/div/section/div/div/div/div/aside/form/p[2]/a[4]")).Click();
-            driver.FindElement(By.XPath("/html/body/div[2]/div/section/div/div/div/div/aside/form/p[3]/a[1]")).Click();
-            driver.FindElement(By.XPath("/html/body/div[2]/div/section/div/div/div/div/aside/form/p[4]/a[2]")).Click();
-            driver.FindElement(By.XPath("/html/body/div[2]/div/section/div/div/div/div/aside/form/p[5]/a[5]")).Click();
-            driver.FindElement(By.CssSelector("#dea027c8-24d0-4197-9ec3-714423fca021 > a")).Click();
-            Thread.Sleep(2000);
-            driver.FindElement(By.CssSelector("#SenderName")).SendKeys("Дидо");
-            driver.FindElement(By.CssSelector("#SenderPhone")).SendKeys("0888888888");
-            driver.FindElement(By.CssSelector("#SenderEmail")).SendKeys("bla@abv.bg");
-            driver.FindElement(By.CssSelector("#send-broker-message > div.modal-footer > input.green-btn")).Click();
-            driver.Close();
-            driver.Quit();
-        }
-        [Test]
-        public void HW3Dido()
-        {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
-            driver.Manage().Window.Maximize();
-            driver.FindElement(By.XPath("/ html / body / div[2] / div / section[1] / aside[1] / nav / ul / li[5] / a")).Click();
-            Thread.Sleep(3000);
-            Assert.AreEqual(driver.FindElement(By.Id("OwnerContact.GiveARentProperty")).Selected, true);
-            driver.Close();
-            driver.Quit();
-
-        }
+        }    
+                
         [Test]
         public void HWPeter1()
         {
