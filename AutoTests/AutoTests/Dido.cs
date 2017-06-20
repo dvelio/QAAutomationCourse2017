@@ -13,10 +13,11 @@ namespace AutoTests
 {
     [TestFixture]
 
-    public class Did4o
+    public class Didon4o
 
     {
         IWebDriver driver;
+             
         [SetUp]
         public void SetUp()
         {
@@ -29,8 +30,10 @@ namespace AutoTests
             driver.Close();
             driver.Quit();
         }
+       
 
         [Test, Author("Dido"), Description("Find element by ID and Class")]
+        //[TestCase(BrowserList)]
 
         public void HW1_new()
         {
@@ -42,6 +45,7 @@ namespace AutoTests
         }
 
         [Test, Author("Dido"), Description("Find element by Xpath")]
+        
         public void HW2_new()
         {
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/propertylist/");
@@ -61,10 +65,30 @@ namespace AutoTests
         public void HW3_new()
         {
             driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/service/");
-            driver.Manage().Window.Maximize();
             driver.FindElement(By.XPath("/ html / body / div[2] / div / section[1] / aside[1] / nav / ul / li[5] / a")).Click();
             Thread.Sleep(3000);
             Assert.AreEqual(driver.FindElement(By.Id("OwnerContact.GiveARentProperty")).Selected, true);
+        }
+
+        [Test, Author("Dido"), Description("Search for specific broker")]
+        public void HW4_new()
+        {
+            driver.Navigate().GoToUrl("https://yavlenawebsite.melontech.com/broker/");
+            driver.FindElement(By.CssSelector(".hide-cookies-message")).Click();
+            Thread.Sleep(900);
+            IList<IWebElement> List = driver.FindElements(By.CssSelector("article.broker-card h3.name a"));
+            ArrayList NewList = new ArrayList();
+            foreach (IWebElement UserName in List)
+            {
+                NewList.Add(UserName.Text);
+            }
+            foreach (string Name in NewList)
+            {
+                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).Clear();
+                driver.FindElement(By.CssSelector("div.field.search-field input#searchBox")).SendKeys(Name);
+                Thread.Sleep(900);
+                Assert.AreEqual(Name, driver.FindElement(By.CssSelector(".name > a:nth-child(1)")).Text);
+            }
 
         }
     }
